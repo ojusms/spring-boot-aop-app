@@ -1,6 +1,7 @@
 package com.SpringBoot.AOPdemo;
 
 import com.SpringBoot.AOPdemo.DAO.AccountDAO;
+import com.SpringBoot.AOPdemo.DAO.MembershipDAO;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,15 +15,20 @@ public class AoPdemoApplication {
 	}
 
 	@Bean
-	public CommandLineRunner commandLineRunner(AccountDAO accountDAO) {
+	public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		return runner -> {
-			demoBeforeAdvice(accountDAO);
+			demoBeforeAdvice(accountDAO, membershipDAO);
 		};
 	}
 
-	private void demoBeforeAdvice(AccountDAO accountDAO) {
+	private void demoBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		// call business method
 		accountDAO.addAccount();
+		// call membership business method
+		membershipDAO.addAccount();
+		// the @Before advice of logging aspect is called for both the DAO's addAccount() methods
+		// because the pointcut expression does not specify which Class it should be called for.
+		// It will be called when addAccount() of any class is called.
 	}
 
 }
