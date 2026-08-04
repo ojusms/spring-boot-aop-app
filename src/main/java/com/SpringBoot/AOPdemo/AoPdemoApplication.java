@@ -16,8 +16,13 @@ public class AoPdemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(AccountDAO accountDAO) {
 		return runner -> {
-			accountDAO.addAccount();
+			demoBeforeAdvice(accountDAO);
 		};
+	}
+
+	private void demoBeforeAdvice(AccountDAO accountDAO) {
+		// call business method
+		accountDAO.addAccount();
 	}
 
 }
