@@ -26,8 +26,9 @@ public class AoPdemoApplication {
 		accountDAO.addAccount();
 		// call membership business method
 		membershipDAO.addMember();
-		// the @Before advice of logging aspect is called only for AccountDAO addAccount() method
-		// because the pointcut matches the return type of 'void' now.
+		// the @Before advice of logging aspect is called for both the DAO's methods as
+		// the pointcut expression matches for any return type on top of starting with
+		// 'add' now
 	}
 
 }
