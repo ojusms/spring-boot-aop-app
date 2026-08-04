@@ -14,7 +14,8 @@ public class DemoLoggingAspect {
 
     // annotated with @Before since this advice executes before execution of target object addAccount() in the
     // pointcut expression. The method name can be anything of choice.
-    @Before("execution(public void addAccount())")
+    // using a fully qualified classname now (package + [class/interface] in pointcut expression to match only that
+    @Before("execution(public void com.SpringBoot.AOPdemo.DAO.AccountDAO.addAccount())")
     public void beforeAddAccountAdvice() {
         System.out.println("==========> Executing @Before advice on addAccount() <==========");
     }

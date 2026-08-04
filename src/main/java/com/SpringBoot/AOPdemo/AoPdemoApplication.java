@@ -26,9 +26,8 @@ public class AoPdemoApplication {
 		accountDAO.addAccount();
 		// call membership business method
 		membershipDAO.addAccount();
-		// the @Before advice of logging aspect is called for both the DAO's addAccount() methods
-		// because the pointcut expression does not specify which Class it should be called for.
-		// It will be called when addAccount() of any class is called.
+		// the @Before advice of logging aspect is called only for AccountDAO's addAccount()
+		// because of pointcut expression update.
 	}
 
 }
