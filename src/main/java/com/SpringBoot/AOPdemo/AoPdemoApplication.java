@@ -32,6 +32,10 @@ public class AoPdemoApplication {
 		// both the @Before advice methods of logging aspect are called for both the DAO's methods since they satisfy the
 		// pointcut expression matching criteria for any method,
 		// having 0 or more parameters of any type, inside any class ,inside DAO package
+
+		// calling new setter methods. Both the Before advice methods are called for these.
+		accountDAO.setName("John");
+		accountDAO.setServiceCode("Gold");
 	}
 
 }
