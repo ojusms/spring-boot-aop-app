@@ -29,7 +29,7 @@ public class AoPdemoApplication {
 		// call membership business method
 		membershipDAO.addMember();
 		membershipDAO.check();
-		// the @Before advice of logging aspect is called for both the DAO's methods since they satisfy the
+		// both the @Before advice methods of logging aspect are called for both the DAO's methods since they satisfy the
 		// pointcut expression matching criteria for any method,
 		// having 0 or more parameters of any type, inside any class ,inside DAO package
 	}

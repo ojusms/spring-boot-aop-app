@@ -28,6 +28,12 @@ public class DemoLoggingAspect {
     public void beforeAddAccountAdvice() {
         System.out.println("\n==========> Executing @Before advice on any method() <==========");
     }
+
+    // new Advice to demonstrate reusability of pointcut expression via pointcut declarative.
+    @Before("forDAO()")
+    public void performAnalytics() {
+        System.out.println("==========> Performing analytics! <==========");
+    }
 }
 
 /*
