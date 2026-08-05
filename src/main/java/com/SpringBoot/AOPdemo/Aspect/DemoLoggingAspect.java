@@ -14,7 +14,7 @@ public class DemoLoggingAspect {
 
     // annotated with @Before since this advice executes before execution of target object addAccount() in the
     // pointcut expression. The method name can be anything of choice.
-    // pointcut expression now matches any method starting with "add" and having a parameter of type Account class,
+    // pointcut expression now matches any method starting with "add" and having one single parameter of type Account class,
     // specified by qualified name, in any class for any
     // return type [void, boolean, List<>, etc.] using wildcard
     // Access modifier removed (public).

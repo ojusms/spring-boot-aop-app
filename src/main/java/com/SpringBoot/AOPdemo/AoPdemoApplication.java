@@ -24,11 +24,12 @@ public class AoPdemoApplication {
 	private void demoBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		// call business method
 		Account tempAccount = new Account();
-		accountDAO.addAccount(tempAccount);
+		accountDAO.addAccount(tempAccount, true);
 		// call membership business method
 		membershipDAO.addMember();
-		// the @Before advice of logging aspect is called only for AccountDAO's addAccount()
-		// because of the match for the parameter of Account type
+		// the @Before advice of logging aspect is not called for any method since no method satisfies the match criteria
+		// Here the AccountDAO addAccount() method takes 2 parameters but the expression matches for only one
+		// of a specific type
 	}
 
 }
