@@ -5,4 +5,6 @@ import com.SpringBoot.AOPdemo.Account;
 public interface AccountDAO {
 
     void addAccount(Account theAccount, boolean vipFlag);
+
+    void doWork();
 }

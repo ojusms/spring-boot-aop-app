@@ -9,4 +9,10 @@ public class AccountDAOImpl implements AccountDAO {
     public void addAccount(Account theAccount, boolean vipFlag) {
         System.out.println(getClass() + " :DOING DB WORK: ADDING AN ACCOUNT");
     }
+
+    // added to demonstrate pointcut expression matching on any method in any class in specific package
+    @Override
+    public void doWork() {
+        System.out.println(getClass() + "doWork()");
+    }
 }
