@@ -2,6 +2,7 @@ package com.SpringBoot.AOPdemo.Aspect;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 // annotated with @Component to enable detection for component scanning
@@ -17,7 +18,13 @@ public class DemoLoggingAspect {
     // pointcut expression now matches any methods inside any classes under DAO package,
     // having 0 or more parameters of any type, for any return type [void, boolean, List<>, etc.] using wildcard
     // Access modifier removed (public).
-    @Before("execution(* com.SpringBoot.AOPdemo.DAO.*.*(..))")
+    // Below is a Pointcut Declarative. It is a way to set the pointcut expression as a variable that can be used for
+    // multiple Advice methods. The method name can be anything and acts as the variable name to be used, as seen below.
+
+    @Pointcut("execution(* com.SpringBoot.AOPdemo.DAO.*.*(..))")
+    private void forDAO() {}
+
+    @Before("forDAO()")
     public void beforeAddAccountAdvice() {
         System.out.println("\n==========> Executing @Before advice on any method() <==========");
     }
