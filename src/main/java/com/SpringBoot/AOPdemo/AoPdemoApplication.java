@@ -23,12 +23,12 @@ public class AoPdemoApplication {
 
 	private void demoBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		// call business method
-		accountDAO.addAccount();
+		Account tempAccount = new Account();
+		accountDAO.addAccount(tempAccount);
 		// call membership business method
 		membershipDAO.addMember();
-		// the @Before advice of logging aspect is called for both the DAO's methods as
-		// the pointcut expression matches for any return type on top of starting with
-		// 'add' now
+		// the @Before advice of logging aspect is called only for AccountDAO's addAccount()
+		// because of the match for the parameter of Account type
 	}
 
 }
