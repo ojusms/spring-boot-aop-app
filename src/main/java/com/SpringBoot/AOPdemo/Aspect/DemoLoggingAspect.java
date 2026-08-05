@@ -14,11 +14,10 @@ public class DemoLoggingAspect {
 
     // annotated with @Before since this advice executes before execution of target object addAccount() in the
     // pointcut expression. The method name can be anything of choice.
-    // pointcut expression now matches any method starting with "add" and having a parameter of type Account class,
-    // specified by qualified name, followed by 0 or more parameters of any type, in any class for any
-    // return type [void, boolean, List<>, etc.] using wildcard
+    // pointcut expression now matches any method starting with "add" and 0 or more parameters of any type,
+    // in any class, for any return type [void, boolean, List<>, etc.] using wildcard
     // Access modifier removed (public).
-    @Before("execution(* add*(com.SpringBoot.AOPdemo.Account, ..))")
+    @Before("execution(* add*(..))")
     public void beforeAddAccountAdvice() {
         System.out.println("\n==========> Executing @Before advice on add*() <==========");
     }

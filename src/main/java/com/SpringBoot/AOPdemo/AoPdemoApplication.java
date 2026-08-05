@@ -27,9 +27,9 @@ public class AoPdemoApplication {
 		accountDAO.addAccount(tempAccount, true);
 		// call membership business method
 		membershipDAO.addMember();
-		// the @Before advice of logging aspect is called only for AccountDAO's addAccount() method
-		// since the pointcut expression matches the signature of 1 parameter of specific type
-		// followed by 0 or more of any type
+		// the @Before advice of logging aspect is called for both the DAO's methods sinc ethey satisfy the
+		// pointcut expression matching criteria for method name starting with 'add' and
+		// having 0 or more parameters of any type
 	}
 
 }
