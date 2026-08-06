@@ -1,5 +1,6 @@
 package com.SpringBoot.AOPdemo.Aspect;
 
+import com.SpringBoot.AOPdemo.Account;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -25,6 +26,20 @@ public class LoggingAspect {
         // Display method signature using JoinPoint
         MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature(); // casting Signature to MethodSig..
         System.out.println("Signature: "+methodSignature);
+
+        // retrieve and print method arguments
+        Object[] args = joinPoint.getArgs();
+        for (Object tempObj : args)
+        {
+            System.out.println(tempObj);
+            // casting argument obj of type Account to Account obj for better print statement. Prints raw hash otherwise.
+            // Alternatively, Account.toString() can be overridden
+            if (tempObj instanceof Account) {
+                Account a = (Account) tempObj;
+                System.out.println("Account name: "+a.getName());
+                System.out.println("Account level: "+a.getLevel());
+            }
+        }
     }
 }
 

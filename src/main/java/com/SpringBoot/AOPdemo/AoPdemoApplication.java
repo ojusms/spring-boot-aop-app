@@ -24,6 +24,8 @@ public class AoPdemoApplication {
 	private void demoBeforeAdvice(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		// call business method
 		Account tempAccount = new Account();
+		tempAccount.setName("John");
+		tempAccount.setLevel("Gold");
 		accountDAO.addAccount(tempAccount, true);
 		accountDAO.doWork();
 		// call membership business method
