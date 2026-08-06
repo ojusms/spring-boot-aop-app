@@ -24,13 +24,26 @@ public class DemoLoggingAspect {
     @Pointcut("execution(* com.SpringBoot.AOPdemo.DAO.*.*(..))")
     private void forDAO() {}
 
-    @Before("forDAO()")
+    // new pointcut declarative for getter methods inside any classes inside DAO package
+    // expression states methods starting with 'get' inside classes within DAO package, similar for 'set' below
+    @Pointcut("execution(* com.SpringBoot.AOPdemo.DAO.*.get*(..))")
+    private void getter() {}
+    // new pointcut declarative for setter methods inside any classes inside DAO package
+    @Pointcut("execution(* com.SpringBoot.AOPdemo.DAO.*.set*(..))")
+    private void setter() {}
+
+    // pointcut declarative combining other declaratives/expressions using logical operators (&&, ||, !)
+    // expressions states all methods inside all classes within DAO package excluding those starting with 'get' and 'set'
+    @Pointcut("forDAO() && !(getter() || setter())")
+    private void forDAOnoGetterSetter() {}
+
+    @Before("forDAOnoGetterSetter()")
     public void beforeAddAccountAdvice() {
         System.out.println("\n==========> Executing @Before advice on any method() <==========");
     }
 
     // new Advice to demonstrate reusability of pointcut expression via pointcut declarative.
-    @Before("forDAO()")
+    @Before("forDAOnoGetterSetter()")
     public void performAnalytics() {
         System.out.println("==========> Performing analytics! <==========");
     }

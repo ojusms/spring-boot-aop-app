@@ -33,9 +33,12 @@ public class AoPdemoApplication {
 		// pointcut expression matching criteria for any method,
 		// having 0 or more parameters of any type, inside any class ,inside DAO package
 
-		// calling new setter methods. Both the Before advice methods are called for these.
+		// calling new getter and setter methods. The Before advice methods of logging aspect should not be called
+		// due to new combined pointcut expression.
 		accountDAO.setName("John");
 		accountDAO.setServiceCode("Gold");
+		String name = accountDAO.getName();
+		String service = accountDAO.getServiceCode();
 	}
 
 }
