@@ -4,6 +4,7 @@ import com.SpringBoot.AOPdemo.Account;
 import com.SpringBoot.AOPdemo.DAO.AccountDAO;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -20,6 +21,21 @@ import java.util.List;
 @Aspect
 @Order(1)
 public class LoggingAspect {
+
+    // add a new method for @AfterThrowing advice. This is called only if the findAccounts()
+    // method throws an exception. Here 'throwing' field consists of the exception thrown.
+    // The value is bound to the Throwable parameter in the method. Same as for the 'returning' field prior,
+    // the names have to be the same so it can bind.
+    @AfterThrowing(pointcut = "execution(* com.SpringBoot.AOPdemo.DAO.AccountDAO.findAccounts(..))",
+            throwing = "exc")
+    void afterThrowingFindAccountsAdvice(JoinPoint joinPoint, Throwable exc) {
+        // print out which method advising on
+        String method = joinPoint.getSignature().toShortString();
+        System.out.println("\n==========>Executing @AfterThrowing advice on method: "+method+ " <==========");
+        // print out result of method call
+        System.out.println("==========> Exception is: "+ exc);
+
+    }
 
     // add a new method for @AfterReturning advice. Here returning field contains the
     // value returned by the findAccounts() method. The name can be anything but must be consistent with the parameter
