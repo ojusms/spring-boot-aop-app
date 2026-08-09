@@ -40,9 +40,8 @@ public class LoggingAspect {
         {
             // log exception
             System.out.println(e.getMessage());
-            // set result. This is returned to main app/calling method. Now the exception is 'swallowed'
-            // and not propagated back. The main app does not know an exception happened at all.
-            result = "Accident on highway! Lanes closed! Your private AOP helicopter is on the way!";
+            // rethrow the exception without returning a default message. Up to the calling function to handle it now
+            throw e;
         }
         // log end time
         long end = System.currentTimeMillis();

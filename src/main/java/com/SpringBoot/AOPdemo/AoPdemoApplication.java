@@ -26,8 +26,18 @@ public class AoPdemoApplication {
 			//demoAfterThrowingAdvice(accountDAO);
 			//demoAfterFinallyAdvice(accountDAO);
 			//demoAroundAdvice(trafficFortuneService);
-			demoAroundAdviceHandleException(trafficFortuneService);
+			//demoAroundAdviceHandleException(trafficFortuneService);
+			demoAroundAdviceRethrowException(trafficFortuneService);
 		};
+	}
+
+	private void demoAroundAdviceRethrowException(TrafficFortuneService trafficFortuneService) {
+		System.out.println("Main add: demoAroundAdviceRethrowException");
+		// set tripWire to true and call getFortune() to throw an exception.
+		// The @Around advice re-throws the exception instead of handling it here.
+		boolean tripWire = true;
+		String result = trafficFortuneService.getFortune(tripWire);
+		System.out.println("Fortune is: "+result);
 	}
 
 	private void demoAroundAdviceHandleException(TrafficFortuneService trafficFortuneService) {
