@@ -3,10 +3,7 @@ package com.SpringBoot.AOPdemo.Aspect;
 import com.SpringBoot.AOPdemo.Account;
 import com.SpringBoot.AOPdemo.DAO.AccountDAO;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.AfterReturning;
-import org.aspectj.lang.annotation.AfterThrowing;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -21,6 +18,16 @@ import java.util.List;
 @Aspect
 @Order(1)
 public class LoggingAspect {
+
+    // add a new method for @After (finally) advice. This is called after advice execution regardless
+    // of exception or happy path. It does not have access to the exception, use @AfterThrowin if access
+    // to exception required.
+    @After("execution(* com.SpringBoot.AOPdemo.DAO.AccountDAO.findAccounts(..))")
+    void afterFinallyFindAccountsAdvice(JoinPoint joinPoint) {
+        // print out which method advising on
+        String method = joinPoint.getSignature().toShortString();
+        System.out.println("\n==========>Executing @After (finally) advice on method: "+method+ " <==========");
+    }
 
     // add a new method for @AfterThrowing advice. This is called only if the findAccounts()
     // method throws an exception. Here 'throwing' field consists of the exception thrown.
