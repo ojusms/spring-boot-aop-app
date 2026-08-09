@@ -32,6 +32,18 @@ public class LoggingAspect {
         System.out.println("\n==========>Executing @AfterReturning advice on method: "+method+ " <==========");
         // print out result of method call
         System.out.println("==========> result is: "+result);
+        // perform some post-processing
+        convertAccountNamesToUpperCase(result);
+        // print out the modified result
+        System.out.println("==========> post-processed result is: "+result);
+    }
+
+    private void convertAccountNamesToUpperCase(List<Account> result) {
+        //iterate over list of accounts
+        for (Account tempAccount : result) {
+            // set each account name to be the uppercase version of itself
+            tempAccount.setName(tempAccount.getName().toUpperCase());
+        }
     }
 
     // all related advices for logging are added here. Starting with an @Before advice.

@@ -28,6 +28,8 @@ public class AoPdemoApplication {
 		List<Account> accounts = accountDAO.findAccounts();
 		System.out.println("Main app: demoAfterReturningAdvice");
 		System.out.println("-----");
+        // the calling method is returned the post-processed result list by the @AfterReturning advice.
+		// the account names will all be in upper case now.
 		System.out.println(accounts);
 		System.out.println("-----");
 	}
