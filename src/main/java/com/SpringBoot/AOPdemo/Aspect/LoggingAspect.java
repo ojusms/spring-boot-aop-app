@@ -3,6 +3,7 @@ package com.SpringBoot.AOPdemo.Aspect;
 import com.SpringBoot.AOPdemo.Account;
 import com.SpringBoot.AOPdemo.DAO.AccountDAO;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
@@ -18,6 +19,28 @@ import java.util.List;
 @Aspect
 @Order(1)
 public class LoggingAspect {
+
+    // add a new method for @Around advice. This is called before and after the target method execution.
+    // It is like a combo of @Before and @After (finally). It has access to ProceedingJoinPoint, which
+    // is a handle to the target method.
+    @Around("execution(* com.SpringBoot.AOPdemo.Service.*.getFortune(..))")
+    Object aroundGetFortuneAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        // print out which method advising on
+        String method = proceedingJoinPoint.getSignature().toShortString();
+        System.out.println("\n==========>Executing @Around advice on method: "+method+ " <==========");
+        // log begin time
+        long start = System.currentTimeMillis();
+        // execute target method
+        Object result = proceedingJoinPoint.proceed();
+        // log end time
+        long end = System.currentTimeMillis();
+        // compute duration
+        long duration = end - start;
+        // print duration
+        System.out.println("Duration: " + duration/1000.0 + " seconds");
+        // return result of target method to calling function
+        return result;
+    }
 
     // add a new method for @After (finally) advice. This is called after advice execution regardless
     // of exception or happy path. It does not have access to the exception, use @AfterThrowin if access
