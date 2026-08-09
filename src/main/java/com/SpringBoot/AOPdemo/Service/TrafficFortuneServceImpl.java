@@ -17,4 +17,11 @@ public class TrafficFortuneServceImpl implements TrafficFortuneService {
         // return a 'fortune'
         return "Expect traffic this morning";
     }
+
+    @Override
+    public String getFortune(boolean tripWire) {
+        if (tripWire)
+            throw new RuntimeException("Accident on highway! Lanes closed!");
+       return getFortune();
+    }
 }
