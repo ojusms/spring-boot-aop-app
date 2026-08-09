@@ -20,8 +20,25 @@ public class AoPdemoApplication {
 	public CommandLineRunner commandLineRunner(AccountDAO accountDAO, MembershipDAO membershipDAO) {
 		return runner -> {
 			//demoBeforeAdvice(accountDAO, membershipDAO);
-			demoAfterReturningAdvice(accountDAO);
+			//demoAfterReturningAdvice(accountDAO);
+			demoAfterThrowingAdvice(accountDAO);
 		};
+	}
+
+	private void demoAfterThrowingAdvice(AccountDAO accountDAO) {
+		// similar to demoAfterReturningAdvice() but wrap it in a try/catch block to catch any
+		// exception that might be thrown. Setting tripWire to true so the findAccounts throws an exception
+		List<Account> accounts = null;
+		boolean tripWire = true;
+			try {
+				accounts = accountDAO.findAccounts(tripWire);
+			} catch (Exception e) {
+				System.out.println("Main app: ... caught Exception: " + e);
+			}
+		System.out.println("Main app: demoAfterThrowingAdvice");
+		System.out.println("-----");
+		System.out.println(accounts);
+		System.out.println("-----");
 	}
 
 	private void demoAfterReturningAdvice(AccountDAO accountDAO) {

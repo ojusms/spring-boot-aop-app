@@ -17,4 +17,6 @@ public interface AccountDAO {
     void setServiceCode(String serviceCode);
 
     List<Account> findAccounts();
+    // new method findAccounts that accepts a boolean parameter to demo throwing exception
+    List<Account> findAccounts(boolean tripWire);
 }
