@@ -1,7 +1,10 @@
 package com.SpringBoot.AOPdemo.Service;
 
+import org.springframework.stereotype.Service;
+
 import java.util.concurrent.TimeUnit;
 
+@Service
 public class TrafficFortuneServceImpl implements TrafficFortuneService {
     @Override
     public String getFortune() {
