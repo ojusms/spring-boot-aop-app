@@ -1,12 +1,16 @@
 package com.SpringBoot.AOPdemo.Aspect;
 
 import com.SpringBoot.AOPdemo.Account;
+import com.SpringBoot.AOPdemo.DAO.AccountDAO;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 // annotated with @Component to enable detection for component scanning
 // annotated with @Aspect to let Spring know this class is an Aspect
@@ -16,6 +20,19 @@ import org.springframework.stereotype.Component;
 @Aspect
 @Order(1)
 public class LoggingAspect {
+
+    // add a new method for @AfterReturning advice. Here returning field contains the
+    // value returned by the findAccounts() method. The name can be anything but must be consistent with the parameter
+    // used in the method signature below. i.e both are "result"
+    @AfterReturning(pointcut = "execution(* com.SpringBoot.AOPdemo.DAO.AccountDAO.findAccounts(..))",
+            returning = "result")
+    void afterReturningFindAccountsAdvice(JoinPoint joinPoint, List<Account> result) {
+        // print out which method advising on
+        String method = joinPoint.getSignature().toShortString();
+        System.out.println("\n==========>Executing @AfterReturning advice on method: "+method+ " <==========");
+        // print out result of method call
+        System.out.println("==========> result is: "+result);
+    }
 
     // all related advices for logging are added here. Starting with an @Before advice.
     // have to use fully qualified name since Pointcut Declarative exists in a separate file now
