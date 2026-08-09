@@ -30,8 +30,20 @@ public class LoggingAspect {
         System.out.println("\n==========>Executing @Around advice on method: "+method+ " <==========");
         // log begin time
         long start = System.currentTimeMillis();
-        // execute target method
-        Object result = proceedingJoinPoint.proceed();
+        // wrap target method execution in try/catch to handle exception if thrown
+        Object result = null;
+        try {
+            // execute target method
+            result = proceedingJoinPoint.proceed();
+        }
+        catch (Exception e)
+        {
+            // log exception
+            System.out.println(e.getMessage());
+            // set result. This is returned to main app/calling method. Now the exception is 'swallowed'
+            // and not propagated back. The main app does not know an exception happened at all.
+            result = "Accident on highway! Lanes closed! Your private AOP helicopter is on the way!";
+        }
         // log end time
         long end = System.currentTimeMillis();
         // compute duration

@@ -33,7 +33,7 @@ public class AoPdemoApplication {
 	private void demoAroundAdviceHandleException(TrafficFortuneService trafficFortuneService) {
 		System.out.println("Main add: demoAroundAdviceHandleException");
 		// set tripWire to true and call getFortune() to throw an exception.
-		// Now, the output on the console will have an exception displayed since the advice is not swallowing it
+		// Now, the output on the console will not show any exception since the @Around advice is swallowing it
 		boolean tripWire = true;
 		String result = trafficFortuneService.getFortune(tripWire);
 		System.out.println("Fortune is: "+result);
